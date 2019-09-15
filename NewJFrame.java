@@ -152,22 +152,36 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        Connection conn=null;
+        //Connection conn=null;
         PreparedStatement pst=null;
         ResultSet rs=null;
         
         try{
         
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            conn=DriverManager.getConnection("jdbc:ucanaccess://D:\\DEMO.accdb");
-            String sql="select * from Login_Table where User_Name='"+username.getText()+"' and User_Pass='"+pass.getText()+"'";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/todo","root","rithwik");
+            String sql="select * from namepass where username='"+username.getText()+"' and pass='"+pass.getText()+"'";
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             if(rs.next()){
+                if("sanket".equals(username.getText())){ 
                 username.setText(null);
                 pass.setText(null);
-                NewJFrame2 Info=new NewJFrame2();
+                    NewJFrame2 Info=new NewJFrame2();
                 Info.setVisible(true);
+                }
+                else if("rithwik".equals(username.getText())){
+                    username.setText(null);
+                pass.setText(null);
+                    NewJFrame21 Info=new NewJFrame21();
+                Info.setVisible(true);
+                }
+                else if("siddhant".equals(username.getText())){
+                    username.setText(null);
+                pass.setText(null);
+                    NewJFrame22 Info=new NewJFrame22();
+                Info.setVisible(true);
+                }
             }
             
             else{
